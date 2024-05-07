@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppointmentPlus - Users</title>
+    <!-- Add Bootstrap CSS for base styling -->
+    <link rel="stylesheet" href="stylesLogo.css">
+    <link rel="stylesheet" href="stylesNavBar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add your custom CSS for styling -->
+    <!-- <link rel="stylesheet" href="stylesHistory.css"> -->
+    <!-- Add jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Add Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html"><img class="logo" src="images/appointmentPlus.png" alt="Your Logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" id="home-nav">
+                            <a class="nav-link" href="index.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/home.png" alt="Your Logo">
+                                    <span class="hint">Homepage</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="appointments-nav">
+                            <a class="nav-link" href="available-appointments.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/appointments.png" alt="Your Logo">
+                                    <span class="hint">Appointments</span>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item" id="contact-nav">
+                            <a class="nav-link" href="contact.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/contact.png" alt="Your Logo">
+                                    <span class="hint">Contact</span>
+                                </div>
+                            </a>
+                        </li> -->
+                        <li class="nav-item d-none" id="profile-nav">
+                            <a class="nav-link" href="profile.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/profile.png" alt="Your Logo">
+                                    <span class="hint">Profile</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="history-nav">
+                            <a class="nav-link" href="history.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/history.png" alt="Your Logo">
+                                    <span class="hint">My History</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="admin-users-nav">
+                            <a class="nav-link" href="admin-users.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/admin-users.png" alt="Your Logo">
+                                    <span class="hint">Manage Users</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="admin-history-nav">
+                            <a class="nav-link" href="admin-history.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/admin-history.png" alt="Your Logo">
+                                    <span class="hint">Manage Appointments</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="logout-nav">
+                            <a class="nav-link" href="index.html" onclick="logout()">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/logout.png" alt="Your Logo">
+                                    <span class="hint">Logout</span>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="available-appointments.html" id="appointments-nav" >Appointments</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="available-appointments.html" id="appointments-nav" >Appointments</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li> -->
+                        <!-- <li class="nav-item d-none" id="logout-nav" >
+                            <a class="nav-link" href="index.html" onclick="logout()"><img class="logo" style="height: 35px;" src="images/logout.png" alt="Your Logo"></a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <button class="btn btn-primary">Book Appointment</button>
+                        </li> -->
+                    </ul>
+                    <span class="navbar-text ml-auto d-none" id="welcome-text">
+                        Welcome, <span id="username"></span>
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal for Success Message -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Successfully.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Error Message -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Failed. Please try again.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Add a Bootstrap modal for editing user information -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Use the provided form for editing user information -->
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="editId">ID</label>
+                            <input type="text" class="form-control" id="editId" name="editId" required readonly>
+                        </div>
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label for="editFirstName">First Name</label>
+                            <input type="text" class="form-control" id="editFirstName" name="firstName" placeholder="e.g. John" required>
+                        </div>
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label for="editLastName">Last Name</label>
+                            <input type="text" class="form-control" id="editLastName" name="lastName" placeholder="e.g. Doe" required>
+                        </div>
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="email" class="form-control" id="editEmail" name="email" placeholder="Your Email" required>
+                        </div>
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="editPassword">Password</label>
+                            <input type="password" class="form-control" id="editPassword" name="password" placeholder="Your Password" required>
+                        </div>
+                        <!-- Date of Birth -->
+                        <div class="form-group">
+                            <label for="editDob">Date of Birth</label>
+                            <input type="date" class="form-control" id="editDob" name="dob" placeholder="e.g. 1990-01-15" required>
+                        </div>
+                        <!-- Weight -->
+                        <div class="form-group">
+                            <label for="editWeight">Weight (kg)</label>
+                            <input type="number" class="form-control" id="editWeight" name="weight" placeholder="e.g. 70" required>
+                        </div>
+                        <!-- Height -->
+                        <div class="form-group">
+                            <label for="editHeight">Height (cm)</label>
+                            <input type="number" class="form-control" id="editHeight" name="height" placeholder="e.g. 175" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRole">Role</label>
+                            <select class="form-control" id="editRole" name="role" required>
+                                <option value="patient">patient</option>
+                                <option value="admin">admin</option>
+                                <option value="nurse">nurse</option>
+                            </select>
+                        </div>
+                        <!-- Save Profile Changes button -->
+                        <button id="saveProfileButton" class="form-btn btn-primary" type="submit">Save Changes</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container mt-5">
+        <h1>Users</h1>
+
+        <div class="table-container">
+            <table class="table table-responsive mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Date of Birth</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Height</th>
+                        <th scope="col">BMI</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- User data will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Your existing JavaScript code
+        $(document).ready(function () {
+            // Fetch the appointment history from the server
+            $.ajax({
+                type: "GET",
+                url: "/admin-users",
+                success: function (data) {
+                    const users  = data.users;
+                    console.log("Users:", users);
+
+                    const userTableBody = $('#userTableBody');
+
+                    // Iterate through the appointments and append them to the table
+                    users.forEach(function (user) {
+                        const row = $('<tr>');
+                        row.append($('<td>').text(user.firstName));
+                        row.append($('<td>').text(user.lastName));
+                        row.append($('<td>').text(user.email));
+                        row.append($('<td>').text(new Date(user.dob).toDateString()));
+                        row.append($('<td>').text(user.weight));
+                        row.append($('<td>').text(user.height));
+                        row.append($('<td>').text(user.bmi));
+                        row.append($('<td>').text(user.role));   
+
+                        const editBtn = $('<button>').text('Edit').addClass('btn btn-primary');
+                        editBtn.click(function () {
+                            // Populate the form fields with the user's information
+                            $('#editId').val(user._id);
+                            $('#editFirstName').val(user.firstName);
+                            $('#editLastName').val(user.lastName);
+                            $('#editEmail').val(user.email);
+                            $('#editPassword').val(user.password);
+                            $('#editDob').val(new Date(user.dob).toISOString().split('T')[0]);
+                            $('#editWeight').val(user.weight);
+                            $('#editHeight').val(user.height);
+                            $('#editRole').val(user.role);
+                            
+                            // Show the edit user modal
+                            $('#editUserModal').modal('show');
+                        });    
+
+                        // if (new Date(appointment.dateTime) > new Date()) {
+                        //     const cancelBtn = $('<button>').text('Cancel').addClass('btn btn-danger');
+                        //     console.log(appointment._id)
+                        //     cancelBtn.click(function () {
+                        //         $.ajax({
+                        //             type: 'POST',
+                        //             url: '/cancel-appointment',
+                        //             data: JSON.stringify({ appointmentId: appointment._id }),
+                        //             contentType: 'application/json',
+                        //             success: function (response) {
+                        //                 console.log('Appointment canceled:', response);
+                        //                 $('#successModal .modal-body').text(response.message);
+                        //                 $('#successModal').modal('show');
+                        //                 // Update the status in the UI as well
+                        //                 row.find('td:nth-child(6)').text('canceled');
+                        //             },
+                        //             error: function (error) {
+                        //                 console.error('Error cancelling appointment:', error);
+                        //                 $('#errorModal .modal-body').text(data.error);
+                        //                 $('#errorModal').modal('show');
+                                        
+                        //             }
+                        //         });
+                        //     });
+                        //     row.append($('<td>').append(cancelBtn));
+                        // } else {
+                        //     row.append($('<td>').text(''));
+                        // }
+                        row.append($('<td>').append(editBtn));         
+                        userTableBody.append(row);
+                    });
+                },
+                error: function (error) {
+                    console.error("Error fetching users:", error);
+                    // Handle the error as needed
+                    $('#errorModal .modal-body').text("Error fetching users. Check if you are logged in.");
+                    $('#errorModal').modal('show');
+                }
+            });
+
+            // Function to handle form submission when the "Save Changes" button is clicked
+            $('#profileForm').submit(function (event) {
+                event.preventDefault();
+                // Add your logic to save the changes here
+                // You can use AJAX to send the updated user information to the server
+                const updatedUser = {
+                    userId: $('#editId').val(),
+                    firstName: $('#editFirstName').val(),
+                    lastName: $('#editLastName').val(),
+                    email: $('#editEmail').val(),
+                    password: $('#editPassword').val(),
+                    dob: $('#editDob').val(),
+                    weight: $('#editWeight').val(),
+                    height: $('#editHeight').val(),
+                    role: $('#editRole').val()
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/update-user",
+                    data: JSON.stringify(updatedUser), // Assuming the server expects JSON data
+                    contentType: 'application/json',
+                    success: function (response) {
+                        // Handle the success response
+                        $('#errorModal .modal-body').text(response.message);
+                        $('#successModal').modal('show');
+                        setTimeout(function() {
+                        window.location.href = 'admin-users.html';
+                        }, 2000);
+                    },
+                    error: function (error) {
+                        // Display error message
+                        $('#errorModal .modal-body').text(data.error);
+                        $('#errorModal').modal('show');
+                    }
+                });
+                // Close the modal after saving changes
+                $('#editUserModal').modal('hide');
+            });
+
+
+        });
+    </script>
+
+    <script src="navbarfunction.js"></script>
+
+</body>
+
+</html>

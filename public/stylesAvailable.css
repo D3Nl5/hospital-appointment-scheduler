@@ -1,0 +1,66 @@
+/* Add custom CSS styles for your hospital appointment scheduling application */
+
+/* Set background color for the body */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #dfe6e9;
+}
+.container:not(.container-nav) {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+/* Available dates list styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li:not(.nav-item) {
+    font-size: 18px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out;
+}
+li:hover {
+    background-color: #80b2e9;
+}
+
+.selected-hour {
+    background-color: #80b2e9; /* Change this to your desired color */
+    color: #fff; /* Change this to your desired text color */
+}
+
+/* Style the card for the appointment booking form */
+.card {
+    margin-top: 20px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+}
+
+/* Style form labels and input fields */
+.form-group label {
+    font-weight: bold;
+}
+
+/* Style the submit button */
+.btn-primary {
+    background-color: #80b2e9; /* Primary blue color */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #529be9; /* Darker blue on hover */
+}
+
+

@@ -1,0 +1,52 @@
+.navbar{
+    background-color:#97bdd6;
+}
+
+body{
+    background-color:#dfe6e9;
+}
+
+.table-containe{
+    background-color:#dfe6e9;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+#welcome-text{
+    color:#fff ;
+    font-size: 20px;
+}
+
+.hint {
+    position: absolute;
+    top: 100%; /* Position the hint under the image */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.image-container:hover .hint {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Show the hint to the right of the icon on smaller screens */
+@media (max-width: 768px) {
+    .hint {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+    }
+}

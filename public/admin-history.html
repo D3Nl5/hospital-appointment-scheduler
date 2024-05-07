@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment - All History</title>
+    <!-- Add Bootstrap CSS for base styling -->
+    <link rel="stylesheet" href="stylesLogo.css">
+    <link rel="stylesheet" href="stylesNavBar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add your custom CSS for styling -->
+    <!-- <link rel="stylesheet" href="stylesHistory.css"> -->
+    <!-- Add jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Add Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand" href="index.html"><img class="logo" src="images/appointmentPlus.png" alt="Your Logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" id="home-nav">
+                            <a class="nav-link" href="index.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/home.png" alt="Your Logo">
+                                    <span class="hint">Homepage</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="appointments-nav">
+                            <a class="nav-link" href="available-appointments.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/appointments.png" alt="Your Logo">
+                                    <span class="hint">Appointments</span>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item" id="contact-nav">
+                            <a class="nav-link" href="contact.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/contact.png" alt="Your Logo">
+                                    <span class="hint">Contact</span>
+                                </div>
+                            </a>
+                        </li> -->
+                        <li class="nav-item d-none" id="profile-nav">
+                            <a class="nav-link" href="profile.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/profile.png" alt="Your Logo">
+                                    <span class="hint">Profile</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="history-nav">
+                            <a class="nav-link" href="history.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/history.png" alt="Your Logo">
+                                    <span class="hint">My History</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="admin-users-nav">
+                            <a class="nav-link" href="admin-users.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/admin-users.png" alt="Your Logo">
+                                    <span class="hint">Manage Users</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="admin-history-nav">
+                            <a class="nav-link" href="admin-history.html">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/admin-history.png" alt="Your Logo">
+                                    <span class="hint">Manage Appointments</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none" id="logout-nav">
+                            <a class="nav-link" href="index.html" onclick="logout()">
+                                <div class="image-container">
+                                    <img class="logo" style="height: 35px; width: 35px;" src="images/logout.png" alt="Your Logo">
+                                    <span class="hint">Logout</span>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="available-appointments.html" id="appointments-nav" >Appointments</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="available-appointments.html" id="appointments-nav" >Appointments</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li> -->
+                        <!-- <li class="nav-item d-none" id="logout-nav" >
+                            <a class="nav-link" href="index.html" onclick="logout()"><img class="logo" style="height: 35px;" src="images/logout.png" alt="Your Logo"></a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <button class="btn btn-primary">Book Appointment</button>
+                        </li> -->
+                    </ul>
+                    <span class="navbar-text ml-auto d-none" id="welcome-text">
+                        Welcome, <span id="username"></span>
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal for Success Message -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Successfully.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Error Message -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Failed. Please try again.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter by Appointment Date -->
+    <div class="container mt-3">
+        <div class="form-group">
+            <label for="appointmentDateFilter">Filter by Appointment Date:</label>
+            <input type="date" class="form-control" id="appointmentDateFilter">
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container mt-5">
+        <h1>Appointment History</h1>
+
+        <div class="table-container">
+            <table class="table table-responsive mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">Date Reservation</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Appointment Dose</th>
+                        <th scope="col">Appointment Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Canceled Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adminAppointmentTableBody">
+                    <!-- Appointments will be dynamically added here -->
+                    <!-- Example structure for each row: -->
+                    <!-- <tr>
+                        <td>2023-10-15 12:00:00</td>
+                        <td>25.00</td>
+                        <td>Scheduled</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Your existing JavaScript code
+        $(document).ready(function () {
+            let appointments = []; // Define the appointments variable in the correct scope
+    
+            // Fetch the appointment history from the server
+            $.ajax({
+                type: "GET",
+                url: "/admin-appointment-history",
+                success: function (data) {
+                    appointments = data.appointments; // Assign the fetched appointments to the variable
+    
+                    // console.log("Admin Appointments:", appointments);
+    
+                    const adminAppointmentTableBody = $('#adminAppointmentTableBody');
+    
+                    // Function to filter the appointments based on the selected date
+                    const filterAppointments = function (selectedDate) {
+                        // Clear the existing table data
+                        adminAppointmentTableBody.empty();
+    
+                        // Iterate through the appointments and append them to the table
+                        appointments.forEach(function (appointment) {
+                            const appointmentDate = new Date(appointment.dateTime).toLocaleDateString();
+                            if (!selectedDate || appointmentDate === selectedDate) {
+                                const row = $('<tr>');
+                                const date = new Date(appointment.dateTime).toLocaleString();
+                                const status = appointment.status;
+                                const firstName = appointment.patient.firstName;
+                                const lastName = appointment.patient.lastName;
+                                const dose = appointment.dose;
+                                const dateReservation = new Date(appointment.dateReservation).toLocaleString();
+                                const dateCanceled = new Date(appointment.dateCanceled).toLocaleString();
+    
+                                row.append($('<td>').text(dateReservation));
+                                row.append($('<td>').text(firstName));
+                                row.append($('<td>').text(lastName));
+                                row.append($('<td>').text(dose));
+                                row.append($('<td>').text(date));
+                                row.append($('<td>').text(status));
+                                if (dateCanceled == 'Invalid Date') {
+                                    row.append($('<td>').text('-'));
+                                } else {
+                                    row.append($('<td>').text(dateCanceled));
+                                    // console.log(dateCanceled);
+                                }
+    
+                                if (new Date(appointment.dateTime) > new Date()) {
+                                    const cancelBtn = $('<button>').text('Cancel').addClass('btn btn-danger');
+                                    // console.log(appointment._id);
+                                    cancelBtn.click(function () {
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/cancel-appointment',
+                                            data: JSON.stringify({ appointmentId: appointment._id }),
+                                            contentType: 'application/json',
+                                            success: function (response) {
+                                                console.log('Appointment canceled:', response);
+                                                $('#successModal .modal-body').text(response.message);
+                                                $('#successModal').modal('show');
+                                                // Update the status in the UI as well
+                                                row.find('td:nth-child(6)').text('canceled');
+                                            },
+                                            error: function (error) {
+                                                console.error('Error cancelling appointment:', error);
+                                                $('#errorModal .modal-body').text(data.error);
+                                                $('#errorModal').modal('show');
+    
+                                            }
+                                        });
+                                    });
+                                    row.append($('<td>').append(cancelBtn));
+                                } else {
+                                    row.append($('<td>').text(''));
+                                }
+    
+                                const completedBtn = $('<button>').text('Completed').addClass('btn btn-info');
+                                // console.log(appointment._id);
+                                completedBtn.click(function () {
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/completed-appointment',
+                                        data: JSON.stringify({ appointmentId: appointment._id }),
+                                        contentType: 'application/json',
+                                        success: function (response) {
+                                            console.log('Appointment completed:', response);
+                                            $('#successModal .modal-body').text(response.message);
+                                            $('#successModal').modal('show');
+                                            // Update the status in the UI as well
+                                            row.find('td:nth-child(6)').text('completed');
+                                        },
+                                        error: function (error) {
+                                            console.error('The operation cannot be completed:', error);
+                                            $('#errorModal .modal-body').text(data.error);
+                                            $('#errorModal').modal('show');
+    
+                                        }
+                                    });
+                                });
+                                row.append($('<td>').append(completedBtn));
+    
+                                adminAppointmentTableBody.append(row);
+                            }
+                        });
+                    };
+    
+                    // Initial rendering of all appointments
+                    filterAppointments();
+    
+                    // Function to handle the filtering based on the selected date
+                    $('#appointmentDateFilter').change(function () {
+                        const selectedDate = new Date($('#appointmentDateFilter').val()).toLocaleDateString();
+                        filterAppointments(selectedDate);
+                    });
+                },
+                error: function (error) {
+                    console.error("Error fetching appointment history:", error);
+                    // Handle the error as needed
+                    $('#errorModal .modal-body').text("Error fetching appointment history. Check if you are logged in.");
+                    $('#errorModal').modal('show');
+                }
+            });
+        });
+    </script>
+    
+    
+
+    <script src="navbarfunction.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppointmentPlus</title>
+    <link rel="icon" href="images/appointmentPlus_small.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add your custom CSS if needed -->
+    <link rel="stylesheet" href="stylesLogo.css">
+    <link rel="stylesheet" href="stylesNavBar.css">
+    <link rel="stylesheet" href="styleLogRegForms.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Add Bootstrap and jQuery scripts -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><img class="logo" src="images/appointmentPlus.png" alt="Your Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" id="home-nav">
+                        <a class="nav-link" href="index.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/home.png" alt="Your Logo">
+                                <span class="hint">Homepage</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="appointments-nav">
+                        <a class="nav-link" href="available-appointments.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/appointments.png" alt="Your Logo">
+                                <span class="hint">Appointments</span>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item" id="contact-nav">
+                        <a class="nav-link" href="contact.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/contact.png" alt="Your Logo">
+                                <span class="hint">Contact</span>
+                            </div>
+                        </a>
+                    </li> -->
+                    <li class="nav-item d-none" id="profile-nav">
+                        <a class="nav-link" href="profile.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/profile.png" alt="Your Logo">
+                                <span class="hint">Profile</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="history-nav">
+                        <a class="nav-link" href="history.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/history.png" alt="Your Logo">
+                                <span class="hint">My History</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="history-nav">
+                        <a class="nav-link" href="history.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/history.png" alt="Your Logo">
+                                <span class="hint">My History</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="admin-users-nav">
+                        <a class="nav-link" href="admin-users.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/admin-users.png" alt="Your Logo">
+                                <span class="hint">Manage Users</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="admin-history-nav">
+                        <a class="nav-link" href="admin-history.html">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/admin-history.png" alt="Your Logo">
+                                <span class="hint">Manage Appointments</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="logout-nav">
+                        <a class="nav-link" href="index.html" onclick="logout()">
+                            <div class="image-container">
+                                <img class="logo" style="height: 35px; width: 35px;" src="images/logout.png" alt="Your Logo">
+                                <span class="hint">Logout</span>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="available-appointments.html" id="appointments-nav" >Appointments</a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="available-appointments.html" id="appointments-nav" >Appointments</a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li> -->
+                    <!-- <li class="nav-item d-none" id="logout-nav" >
+                        <a class="nav-link" href="index.html" onclick="logout()"><img class="logo" style="height: 35px;" src="images/logout.png" alt="Your Logo"></a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </li> -->
+                </ul>
+                <span class="navbar-text ml-auto d-none" id="welcome-text">
+                    Welcome, <span id="username"></span>
+                </span>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Modal for Success Message -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Patient added successfully.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Error Message -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Failed to add patient. Please try again.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page Content -->
+<div class="container mt-5">
+    <h1 class="text-center">Welcome to the AppointmentPlus</h1>
+
+    <!-- Form Selection Tabs -->
+    <ul class="nav nav-tabs justify-content-center" id="formTabs">
+        <li class="nav-item">
+            <a class="nav-link active" onclick="switchToTab('loginTab')">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" onclick="switchToTab('registerTab')">Register</a>
+        </li>
+    </ul>
+
+    <!-- Form Tabs Content -->
+    <div class="tab-content mt-3">
+        <!-- Login Form Tab -->
+        <div class="tab-pane fade show active" id="loginTab">
+            <div class="form-container">
+                <h2 class="form-title">Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="form-btn">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Registration Form Tab -->
+        <div class="tab-pane fade" id="registerTab">
+            <div class="form-container">
+                <h2 class="form-title">Register</h2>
+                <form id="registerForm">
+                    <!-- First Name -->
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="e.g. John" required>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="e.g. Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Your Password" required>
+                    </div>
+                    <!-- Add more registration fields here as needed -->
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" placeholder="e.g. 1990-01-15" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" class="form-control" id="weight" placeholder="e.g. 70" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" class="form-control" id="height" placeholder="e.g. 175" required>
+                    </div>
+                    <!-- Search Available Appointments button -->
+                    <button id="addPatientButton" class="form-btn btn-primary" type="submit" >Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript code for form switching -->
+<script>
+    function switchToTab(tabId) {
+        $('.nav-link').removeClass('active');
+        $('#' + tabId).addClass('active');
+        $('.tab-pane').removeClass('show active');
+        $('#' + tabId).addClass('show active');
+    }
+</script>
+
+<!-- jQuery AJAX Request to Add Patient -->
+<script>
+    $(document).ready(function () {
+        $("#registerForm").submit(function (event) {
+            event.preventDefault();
+
+            const form = this; // Reference to the form element
+
+            // Example patient data
+            const newPatient = {
+                firstName: $("#firstName").val(),
+                lastName: $("#lastName").val(),
+                email: $("#email").val(),
+                password: $("#password").val(),
+                dob: $("#dob").val(),
+                weight: parseFloat($("#weight").val()),
+                height: parseFloat($("#height").val())
+            };
+
+            if (!newPatient.firstName || !newPatient.lastName || !newPatient.email || !newPatient.password || !newPatient.dob || !newPatient.weight || !newPatient.height) {
+                customErrorAlert("Please fill in all required fields.");
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/addPatient",
+                contentType: "application/json",
+                data: JSON.stringify(newPatient),
+                success: function (data) {
+                    customSuccessAlert(data.message);
+                    console.log("Patient added successfully.");
+
+                    // Reset the form after a successful submission
+                    form.reset();
+                },
+                error: function (error) {
+                    customErrorAlert("Failed to add patient. " + error.responseJSON.error);
+                    console.error("Failed to add patient.");
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $("#loginForm").submit(function (event) {
+            event.preventDefault();
+
+            const form = this; // Reference to the form element
+
+            // Example login data
+            const loginData = {
+                email: $("#loginEmail").val(),
+                password: $("#loginPassword").val()
+            };
+
+            if (!loginData.email || !loginData.password) {
+                customErrorAlert("Please fill in both email and password.");
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/login",
+                contentType: "application/json",
+                data: JSON.stringify(loginData),
+                success: function (data) {
+                    customSuccessAlert("Login successful: " + data.message);
+                    console.log("Login successful.");
+                    form.reset();
+                    // Save the token in a cookie
+                    setTokenCookie(data.token);
+                    window.location.href = 'available-appointments.html';
+
+                    // You can handle the successful login here, such as redirecting the user to a dashboard page
+                    // For example: window.location.href = '/dashboard.html';
+                },
+                error: function (error) {
+                    customErrorAlert("Login failed. " + error.responseJSON.error);
+                    console.error("Login failed.");
+                }
+            });
+        });
+    });
+
+
+    function customSuccessAlert(message) {
+        $('#successModal .modal-body').text(message);
+        $('#successModal').modal('show');
+    }
+
+    function customErrorAlert(message) {
+        $('#errorModal .modal-body').text(message);
+        $('#errorModal').modal('show');
+    }
+
+    // Function to redirect to available appointments page
+    function redirectToAvailableAppointments() {
+        // Redirect to the 'available-appointments.html' page
+        window.location.href = 'available-appointments.html';
+    }
+
+    function setTokenCookie(token) {
+        // Set a cookie with the token
+        document.cookie = `token=${token}; secure; samesite=strict`;
+        // document.cookie = `token=${token}; secure; HttpOnly; SameSite=Strict`;
+    }
+</script>
+
+<script src="navbarfunction.js"></script>
+
+</body>
+</html>
